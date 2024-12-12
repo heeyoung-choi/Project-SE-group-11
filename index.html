@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Match Schedules</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Match Schedules</h1>
+  </header>
+  
+  <section class="filter-section">
+    <div class="filter-controls">
+      <div class="filter-field">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date"/>
+      </div>
+      <div class="filter-field">
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date"/>
+      </div>
+      <button id="filter-btn">Filter</button>
+    </div>
+  </section>
+
+  <section class="loading-section" id="loading-section">Loading...</section>
+  <section class="error-section" id="error-section"></section>
+  
+  <section class="match-list" id="match-list"></section>
+  
+  <script src="script.js"></script>
+</body>
+</html>
