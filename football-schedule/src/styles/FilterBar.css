@@ -1,0 +1,40 @@
+.filter-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  margin-bottom: 1rem;
+}
+
+.filter-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.filter-inputs label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.filter-inputs input {
+  padding: 0.3rem;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  background: #4A90E2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.filter-button:hover {
+  background: #357ab8;
+}
