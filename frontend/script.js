@@ -32,6 +32,7 @@ async function fetchMatches() {
       throw new Error('Failed to fetch matches');
     }
     const data = await response.json();
+    console.log(data);
     allMatches = data.response || [];
     renderMatches(allMatches);
   } catch (err) {

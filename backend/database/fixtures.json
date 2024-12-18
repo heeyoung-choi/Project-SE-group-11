@@ -1,0 +1,1395 @@
+{
+  "get": "fixtures",
+  "parameters": {
+    "next": "20",
+    "timezone": "Asia/Saigon"
+  },
+  "errors": [],
+  "results": 20,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "fixture": {
+        "id": 1313145,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T19:45:00+07:00",
+        "timestamp": 1734353100,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Takhti Stadium",
+          "city": "Bandar-e-Anzalī"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 290,
+        "name": "Persian Gulf Pro League",
+        "country": "Iran",
+        "logo": "https://media.api-sports.io/football/leagues/290.png",
+        "flag": "https://media.api-sports.io/flags/ir.svg",
+        "season": 2024,
+        "round": "Regular Season - 12"
+      },
+      "teams": {
+        "home": {
+          "id": 2717,
+          "name": "Malavan",
+          "logo": "https://media.api-sports.io/football/teams/2717.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2737,
+          "name": "Tractor Sazi",
+          "logo": "https://media.api-sports.io/football/teams/2737.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1275420,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T20:00:00+07:00",
+        "timestamp": 1734354000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 20035,
+          "name": "Kigali Pelé Stadium",
+          "city": "Kigali"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 405,
+        "name": "National Soccer League",
+        "country": "Rwanda",
+        "logo": "https://media.api-sports.io/football/leagues/405.png",
+        "flag": "https://media.api-sports.io/flags/rw.svg",
+        "season": 2024,
+        "round": "Regular Season - 13"
+      },
+      "teams": {
+        "home": {
+          "id": 22782,
+          "name": "Vision",
+          "logo": "https://media.api-sports.io/football/teams/22782.png",
+          "winner": null
+        },
+        "away": {
+          "id": 5314,
+          "name": "Etincelles",
+          "logo": "https://media.api-sports.io/football/teams/5314.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1284021,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T20:00:00+07:00",
+        "timestamp": 1734354000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 21223,
+          "name": "University College London",
+          "city": "Shenley, Hertfordshire"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 703,
+        "name": "Professional Development League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/703.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2024,
+        "round": "Regular Season - 17"
+      },
+      "teams": {
+        "home": {
+          "id": 20019,
+          "name": "Watford U21",
+          "logo": "https://media.api-sports.io/football/teams/20019.png",
+          "winner": null
+        },
+        "away": {
+          "id": 20080,
+          "name": "Bristol City U21",
+          "logo": "https://media.api-sports.io/football/teams/20080.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1302260,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T20:00:00+07:00",
+        "timestamp": 1734354000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 3150,
+          "name": "Dire Dawa Stadium",
+          "city": "Dire Dawa"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 363,
+        "name": "Premier League",
+        "country": "Ethiopia",
+        "logo": "https://media.api-sports.io/football/leagues/363.png",
+        "flag": "https://media.api-sports.io/flags/et.svg",
+        "season": 2024,
+        "round": "Regular Season - 12"
+      },
+      "teams": {
+        "home": {
+          "id": 4125,
+          "name": "Welwalo Adigrat Uni",
+          "logo": "https://media.api-sports.io/football/teams/4125.png",
+          "winner": null
+        },
+        "away": {
+          "id": 4110,
+          "name": "Adama Kenema",
+          "logo": "https://media.api-sports.io/football/teams/4110.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1302265,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T20:00:00+07:00",
+        "timestamp": 1734354000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 3150,
+          "name": "Dire Dawa Stadium",
+          "city": "Dire Dawa"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 363,
+        "name": "Premier League",
+        "country": "Ethiopia",
+        "logo": "https://media.api-sports.io/football/leagues/363.png",
+        "flag": "https://media.api-sports.io/flags/et.svg",
+        "season": 2024,
+        "round": "Regular Season - 12"
+      },
+      "teams": {
+        "home": {
+          "id": 4112,
+          "name": "Bahardar",
+          "logo": "https://media.api-sports.io/football/teams/4112.png",
+          "winner": null
+        },
+        "away": {
+          "id": 4115,
+          "name": "Dire Dawa Kenema",
+          "logo": "https://media.api-sports.io/football/teams/4115.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1286456,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T20:15:00+07:00",
+        "timestamp": 1734354900,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "KMC Stadium",
+          "city": "Dar es Salaam"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 567,
+        "name": "Ligi kuu Bara",
+        "country": "Tanzania",
+        "logo": "https://media.api-sports.io/football/leagues/567.png",
+        "flag": "https://media.api-sports.io/flags/tz.svg",
+        "season": 2024,
+        "round": "Regular Season - 15"
+      },
+      "teams": {
+        "home": {
+          "id": 8061,
+          "name": "KMC",
+          "logo": "https://media.api-sports.io/football/teams/8061.png",
+          "winner": null
+        },
+        "away": {
+          "id": 24707,
+          "name": "Pamba Jiji",
+          "logo": "https://media.api-sports.io/football/teams/24707.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1302357,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T20:30:00+07:00",
+        "timestamp": 1734355800,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 12715,
+          "name": "Mbombela Stadium",
+          "city": "Nelspruit"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 288,
+        "name": "Premier Soccer League",
+        "country": "South-Africa",
+        "logo": "https://media.api-sports.io/football/leagues/288.png",
+        "flag": "https://media.api-sports.io/flags/za.svg",
+        "season": 2024,
+        "round": "Regular Season - 8"
+      },
+      "teams": {
+        "home": {
+          "id": 8074,
+          "name": "TS Galaxy",
+          "logo": "https://media.api-sports.io/football/teams/8074.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2691,
+          "name": "Kaizer Chiefs",
+          "logo": "https://media.api-sports.io/football/teams/2691.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1284022,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T21:00:00+07:00",
+        "timestamp": 1734357600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 21222,
+          "name": "Cardiff International Sports Stadium",
+          "city": "Caerdydd"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 703,
+        "name": "Professional Development League",
+        "country": "England",
+        "logo": "https://media.api-sports.io/football/leagues/703.png",
+        "flag": "https://media.api-sports.io/flags/gb-eng.svg",
+        "season": 2024,
+        "round": "Regular Season - 17"
+      },
+      "teams": {
+        "home": {
+          "id": 20016,
+          "name": "Cardiff City U21",
+          "logo": "https://media.api-sports.io/football/teams/20016.png",
+          "winner": null
+        },
+        "away": {
+          "id": 20085,
+          "name": "Queens Park Rangers U21",
+          "logo": "https://media.api-sports.io/football/teams/20085.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1313144,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T21:00:00+07:00",
+        "timestamp": 1734357600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 854,
+          "name": "Shahr-e Qods Stadium",
+          "city": "Shahr-e Qods"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 290,
+        "name": "Persian Gulf Pro League",
+        "country": "Iran",
+        "logo": "https://media.api-sports.io/football/leagues/290.png",
+        "flag": "https://media.api-sports.io/flags/ir.svg",
+        "season": 2024,
+        "round": "Regular Season - 12"
+      },
+      "teams": {
+        "home": {
+          "id": 2733,
+          "name": "Esteghlal FC",
+          "logo": "https://media.api-sports.io/football/teams/2733.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2714,
+          "name": "Gol Gohar",
+          "logo": "https://media.api-sports.io/football/teams/2714.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1315212,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T21:00:00+07:00",
+        "timestamp": 1734357600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 296,
+          "name": "Stadion Vitosha",
+          "city": "Bistrica"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 174,
+        "name": "Cup",
+        "country": "Bulgaria",
+        "logo": "https://media.api-sports.io/football/leagues/174.png",
+        "flag": "https://media.api-sports.io/flags/bg.svg",
+        "season": 2024,
+        "round": "Round of 16"
+      },
+      "teams": {
+        "home": {
+          "id": 1426,
+          "name": "CSKA 1948",
+          "logo": "https://media.api-sports.io/football/teams/1426.png",
+          "winner": null
+        },
+        "away": {
+          "id": 566,
+          "name": "Ludogorets",
+          "logo": "https://media.api-sports.io/football/teams/566.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1319269,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T21:00:00+07:00",
+        "timestamp": 1734357600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Deccan Arena",
+          "city": "Hyderabad"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 325,
+        "name": "Santosh Trophy",
+        "country": "India",
+        "logo": "https://media.api-sports.io/football/leagues/325.png",
+        "flag": "https://media.api-sports.io/flags/in.svg",
+        "season": 2024,
+        "round": "Final Group - 2"
+      },
+      "teams": {
+        "home": {
+          "id": 7173,
+          "name": "Manipur",
+          "logo": "https://media.api-sports.io/football/teams/7173.png",
+          "winner": null
+        },
+        "away": {
+          "id": 7180,
+          "name": "Rajasthan",
+          "logo": "https://media.api-sports.io/football/teams/7180.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1322467,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T21:00:00+07:00",
+        "timestamp": 1734357600,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 2306,
+          "name": "David Petriashvili Arena",
+          "city": "Tbilisi"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 327,
+        "name": "Erovnuli Liga",
+        "country": "Georgia",
+        "logo": "https://media.api-sports.io/football/leagues/327.png",
+        "flag": "https://media.api-sports.io/flags/ge.svg",
+        "season": 2024,
+        "round": "Relegation Round"
+      },
+      "teams": {
+        "home": {
+          "id": 3505,
+          "name": "Gagra",
+          "logo": "https://media.api-sports.io/football/teams/3505.png",
+          "winner": null
+        },
+        "away": {
+          "id": 3503,
+          "name": "Sioni",
+          "logo": "https://media.api-sports.io/football/teams/3503.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1261052,
+        "referee": "T. Qurbanov",
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:00:00+07:00",
+        "timestamp": 1734361200,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 5799,
+          "name": "Tofiq Bəhramov adına Respublika stadionu",
+          "city": "Baku"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 419,
+        "name": "Premyer Liqa",
+        "country": "Azerbaidjan",
+        "logo": "https://media.api-sports.io/football/leagues/419.png",
+        "flag": "https://media.api-sports.io/flags/az.svg",
+        "season": 2024,
+        "round": "Regular Season - 17"
+      },
+      "teams": {
+        "home": {
+          "id": 556,
+          "name": "Qarabag",
+          "logo": "https://media.api-sports.io/football/teams/556.png",
+          "winner": null
+        },
+        "away": {
+          "id": 5503,
+          "name": "Sumqayıt",
+          "logo": "https://media.api-sports.io/football/teams/5503.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1262729,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:00:00+07:00",
+        "timestamp": 1734361200,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 20116,
+          "name": "Clinceni - Arena 1",
+          "city": "Clinceni"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 284,
+        "name": "Liga II",
+        "country": "Romania",
+        "logo": "https://media.api-sports.io/football/leagues/284.png",
+        "flag": "https://media.api-sports.io/flags/ro.svg",
+        "season": 2024,
+        "round": "Regular Season - 17"
+      },
+      "teams": {
+        "home": {
+          "id": 2604,
+          "name": "Metaloglobus",
+          "logo": "https://media.api-sports.io/football/teams/2604.png",
+          "winner": null
+        },
+        "away": {
+          "id": 6898,
+          "name": "Slatina",
+          "logo": "https://media.api-sports.io/football/teams/6898.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1304987,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:00:00+07:00",
+        "timestamp": 1734361200,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Suheim Bin Hamad Stadium",
+          "city": "Doha"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 306,
+        "name": "Second Division",
+        "country": "Qatar",
+        "logo": "https://media.api-sports.io/football/leagues/306.png",
+        "flag": "https://media.api-sports.io/flags/qa.svg",
+        "season": 2024,
+        "round": "Regular Season - 7"
+      },
+      "teams": {
+        "home": {
+          "id": 2902,
+          "name": "Muaither SC",
+          "logo": "https://media.api-sports.io/football/teams/2902.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2908,
+          "name": "Al-Markhiya",
+          "logo": "https://media.api-sports.io/football/teams/2908.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1314535,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:00:00+07:00",
+        "timestamp": 1734361200,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 5710,
+          "name": "Al-Shaab Stadium",
+          "city": "Bagdad"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 542,
+        "name": "Iraqi League",
+        "country": "Iraq",
+        "logo": "https://media.api-sports.io/football/leagues/542.png",
+        "flag": "https://media.api-sports.io/flags/iq.svg",
+        "season": 2024,
+        "round": "Regular Season - 7"
+      },
+      "teams": {
+        "home": {
+          "id": 5242,
+          "name": "Al Shorta",
+          "logo": "https://media.api-sports.io/football/teams/5242.png",
+          "winner": null
+        },
+        "away": {
+          "id": 20463,
+          "name": "Duhok",
+          "logo": "https://media.api-sports.io/football/teams/20463.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1253435,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:15:00+07:00",
+        "timestamp": 1734362100,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Ohod Club Stadium",
+          "city": "Medina"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 308,
+        "name": "Division 1",
+        "country": "Saudi-Arabia",
+        "logo": "https://media.api-sports.io/football/leagues/308.png",
+        "flag": "https://media.api-sports.io/flags/sa.svg",
+        "season": 2024,
+        "round": "Regular Season - 14"
+      },
+      "teams": {
+        "home": {
+          "id": 2943,
+          "name": "Ohod",
+          "logo": "https://media.api-sports.io/football/teams/2943.png",
+          "winner": null
+        },
+        "away": {
+          "id": 2950,
+          "name": "Al-Adalah",
+          "logo": "https://media.api-sports.io/football/teams/2950.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1310276,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:30:00+07:00",
+        "timestamp": 1734363000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": null,
+          "name": "Centre Technique National",
+          "city": "Ouagadougou"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 423,
+        "name": "Ligue 1",
+        "country": "Burkina-Faso",
+        "logo": "https://media.api-sports.io/football/leagues/423.png",
+        "flag": "https://media.api-sports.io/flags/bf.svg",
+        "season": 2024,
+        "round": "Regular Season - 15"
+      },
+      "teams": {
+        "home": {
+          "id": 20029,
+          "name": "Réal du Faso",
+          "logo": "https://media.api-sports.io/football/teams/20029.png",
+          "winner": null
+        },
+        "away": {
+          "id": 22017,
+          "name": "Sporting Cascades",
+          "logo": "https://media.api-sports.io/football/teams/22017.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1310277,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:30:00+07:00",
+        "timestamp": 1734363000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 5758,
+          "name": "Stade Dr Issoufou Joseph Conombo",
+          "city": "Ouagadougou"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 423,
+        "name": "Ligue 1",
+        "country": "Burkina-Faso",
+        "logo": "https://media.api-sports.io/football/leagues/423.png",
+        "flag": "https://media.api-sports.io/flags/bf.svg",
+        "season": 2024,
+        "round": "Regular Season - 15"
+      },
+      "teams": {
+        "home": {
+          "id": 8568,
+          "name": "RC Bobo-Dioulasso",
+          "logo": "https://media.api-sports.io/football/teams/8568.png",
+          "winner": null
+        },
+        "away": {
+          "id": 17923,
+          "name": "Vitesse",
+          "logo": "https://media.api-sports.io/football/teams/17923.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    },
+    {
+      "fixture": {
+        "id": 1310278,
+        "referee": null,
+        "timezone": "Asia/Saigon",
+        "date": "2024-12-16T22:30:00+07:00",
+        "timestamp": 1734363000,
+        "periods": {
+          "first": null,
+          "second": null
+        },
+        "venue": {
+          "id": 4740,
+          "name": "Stade Wobi",
+          "city": "Bobo-Dioulasso"
+        },
+        "status": {
+          "long": "Not Started",
+          "short": "NS",
+          "elapsed": null,
+          "extra": null
+        }
+      },
+      "league": {
+        "id": 423,
+        "name": "Ligue 1",
+        "country": "Burkina-Faso",
+        "logo": "https://media.api-sports.io/football/leagues/423.png",
+        "flag": "https://media.api-sports.io/flags/bf.svg",
+        "season": 2024,
+        "round": "Regular Season - 15"
+      },
+      "teams": {
+        "home": {
+          "id": 8561,
+          "name": "RCK",
+          "logo": "https://media.api-sports.io/football/teams/8561.png",
+          "winner": null
+        },
+        "away": {
+          "id": 8563,
+          "name": "ASFA-Yennenga",
+          "logo": "https://media.api-sports.io/football/teams/8563.png",
+          "winner": null
+        }
+      },
+      "goals": {
+        "home": null,
+        "away": null
+      },
+      "score": {
+        "halftime": {
+          "home": null,
+          "away": null
+        },
+        "fulltime": {
+          "home": null,
+          "away": null
+        },
+        "extratime": {
+          "home": null,
+          "away": null
+        },
+        "penalty": {
+          "home": null,
+          "away": null
+        }
+      }
+    }
+  ]
+}
