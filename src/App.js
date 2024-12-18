@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Example from './Example';
+
 import SearchMatchesPage from './SearchMatchesPage';
 
 const App = () => {
