@@ -40,7 +40,7 @@ const SearchMatchesPage =  () => {
       <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
       <Button variant="contained" startIcon={<SearchIcon/>} onClick={handleClick}>Search</Button>
       <h2>Search Results</h2>
-        <p> {searchResult.response.length} </p>
+        <p> {searchResult ? searchResult.response.length : 0} </p>
     </div>);
 };
 

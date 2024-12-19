@@ -28,18 +28,44 @@ const App = () => {
     </div>
   );
 };
+const handleClick = async () => 
+{
+  let username = "huydang";
+  let password = "123";
+  try {
+    const response = await fetch('http://localhost:8000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',  // Set the content type to JSON
+      },
+      body: JSON.stringify({ username, password }),  // Convert the object to a JSON string
+    });
 
+    if (!response.ok) {
+      // Handle non-200 responses
+      const errorData = await response.json();
+      console.log(errorData)
+    }
+
+    const data = await response.json();  // Parse the JSON response
+    console.log('Login successful:', data);  // Handle success (e.g., save token, navigate)
+  } catch (error) {
+    console.error('Error during login:', error);
+    // Handle error (e.g., show error message to user)
+  }
+}
 const Navigation = ({ setCurrentPage }) => (
   <nav>
     <ul className="nav-bar">
       <li onClick={() => setCurrentPage('home')}>Home</li>
       <li onClick={() => setCurrentPage('search')}>Search Matches</li>
       <li onClick={() => setCurrentPage('about')}>About</li>
+      <li className="login-button" onClick={handleClick}>Login</li> {/* Login button */}
     </ul>
     <style>{`
       .nav-bar {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between; /* Adjust for login button */
         background-color: #333;
         padding: 1rem;
         list-style: none;
@@ -53,6 +79,13 @@ const Navigation = ({ setCurrentPage }) => (
       .nav-bar li:hover {
         background-color: #575757;
         border-radius: 5px;
+      }
+      .nav-bar .login-button {
+        background-color: #4CAF50; /* Green background for the login button */
+        border-radius: 5px;
+      }
+      .nav-bar .login-button:hover {
+        background-color: #45a049; /* Darker green when hovering */
       }
       .page-content {
         padding: 2rem;
