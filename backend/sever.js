@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Routes
-app.use('/auth', loginRoute); // Use the login route with the '/auth' prefix
+app.use('/auth', loginRoute); // Use the authentication routes with the '/auth' prefix
 
 // Start the server
 app.listen(PORT, () => {

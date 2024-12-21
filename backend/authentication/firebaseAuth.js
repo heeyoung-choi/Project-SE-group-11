@@ -33,4 +33,18 @@ router.post('/login', async (req, res) => {
   }
 });
 
+    res.json({
+      message: 'User registered successfully',
+      user: {
+        uid: userRecord.uid,
+        email: userRecord.email,
+        displayName: userRecord.displayName,
+      },
+    });
+  } catch (error) {
+    console.error('Error during registration:', error.message);
+    res.status(500).json({ error: 'Failed to register user' });
+  }
+});
+
 module.exports = router;
