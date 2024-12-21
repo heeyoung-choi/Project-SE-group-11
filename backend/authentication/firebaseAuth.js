@@ -1,5 +1,5 @@
 const express = require('express');
-const admin = require('./firebaseAdmin'); // Import the shared Firebase Admin instance
+const admin = require('../firebaseAdmin'); // Import the shared Firebase Admin instance
 
 const router = express.Router();
 
@@ -9,6 +9,11 @@ router.post('/login', async (req, res) => {
 
   if (!email || !password) {
     return res.status(400).json({ error: 'Email and password are required.' });
+  }
+
+  // check email in wrong format
+  if (!email.includes('@')) {
+    return res.status(400).json({ error: 'Invalid email format' });
   }
 
   try {
