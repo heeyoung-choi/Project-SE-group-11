@@ -33,6 +33,22 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Register route
+router.post('/register', async (req, res) => {
+  const { email, password, displayName } = req.body;
+
+  if (!email || !password || !displayName) {
+    return res.status(400).json({ error: 'Email, password, and display name are required.' });
+  }
+
+  try {
+    // Create a new user
+    const userRecord = await admin.auth().createUser({
+      email,
+      password,
+      displayName,
+    });
+
     res.json({
       message: 'User registered successfully',
       user: {
