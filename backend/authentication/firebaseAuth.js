@@ -5,17 +5,17 @@ const router = express.Router();
 
 // Login route
 router.post('/login', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password) {
-    return res.status(400).json({ error: 'Username and password are required.' });
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
   }
 
   try {
     // Fetch user by email
-    const user = await admin.auth().getUserByEmail(username);
+    const user = await admin.auth().getUserByEmail(email);
     if (!user) {
-      return res.status(401).json({ error: 'Invalid username or password' });
+      return res.status(401).json({ error: 'Invalid email or password' });
     }
 
     // Here, you would compare the password (use a secure method, e.g., bcrypt)
