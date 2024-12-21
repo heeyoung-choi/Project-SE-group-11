@@ -30,4 +30,71 @@ router.post('/predict', async (req, res) => {
   }
 });
 
+// Retrieve all predictions for a specific user
+router.get('/:userId', async (req, res) => {
+    const { userId } = req.params;
+  
+    if (!userId) {
+      return res.status(400).json({ error: 'User ID is required.' });
+    }
+  
+    try {
+      const db = admin.firestore();
+      const predictionsRef = db.collection('predictions');
+      const querySnapshot = await predictionsRef.where('userId', '==', userId).get();
+  
+      if (querySnapshot.empty) {
+        return res.status(404).json({ error: 'No predictions found for this user.' });
+      }
+  
+      const predictions = [];
+      querySnapshot.forEach((doc) => {
+        predictions.push({
+          id: doc.id, // Include the document ID for reference
+          ...doc.data(), // Spread the document data
+        });
+      });
+  
+      res.json({ predictions });
+    } catch (error) {
+      console.error('Error retrieving predictions:', error.message);
+      res.status(500).json({ error: 'Failed to retrieve predictions.' });
+    }
+  });
+
+// Retrieve predictions for a specific user and match
+router.get('/:userId/:matchId', async (req, res) => {
+    const { userId, matchId } = req.params;
+  
+    if (!userId || !matchId) {
+      return res.status(400).json({ error: 'Both userId and matchId are required.' });
+    }
+  
+    try {
+      const db = admin.firestore();
+      const predictionsRef = db.collection('predictions');
+      const querySnapshot = await predictionsRef
+        .where('userId', '==', userId)
+        .where('matchId', '==', matchId)
+        .get();
+  
+      if (querySnapshot.empty) {
+        return res.status(404).json({ error: 'No predictions found for this user and match.' });
+      }
+  
+      const predictions = [];
+      querySnapshot.forEach((doc) => {
+        predictions.push({
+          id: doc.id, // Include the document ID for reference
+          ...doc.data(), // Spread the document data
+        });
+      });
+  
+      res.json({ predictions });
+    } catch (error) {
+      console.error('Error retrieving predictions:', error.message);
+      res.status(500).json({ error: 'Failed to retrieve predictions.' });
+    }
+  });
+
 module.exports = router;
