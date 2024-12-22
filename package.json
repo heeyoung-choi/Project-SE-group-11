@@ -13,6 +13,7 @@
     "react": "^19.0.0",
     "react-datepicker": "^7.5.0",
     "react-dom": "^19.0.0",
+    "react-paginate": "^8.2.0",
     "react-scripts": "5.0.1"
   },
   "scripts": {

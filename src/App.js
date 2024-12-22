@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import SearchMatchesPage from './SearchMatchesPage';
+import SearchMatchesPage from './components/SearchMatchesPage';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -10,7 +10,7 @@ const App = () => {
       case 'home':
         return <HomePage />;
       case 'search':
-        return <SearchMatchesPage />;
+        return <SearchMatchesPage matchesPerPage={10} />;
       case 'about':
         return <AboutPage />;
       default:
