@@ -1,0 +1,143 @@
+/* MatchResults.css */
+
+.match-results {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin: 2rem auto;
+    width: 90%;
+    max-width: 1200px;
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50;
+  }
+  
+  .team-info {
+    flex: 1;
+    background: purple;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .team-info img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+  }
+  
+  .team-info h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 1rem;
+  }
+  
+  .team-info p {
+    font-size: 1rem;
+    color: #555;
+    margin: 0.5rem 0;
+  }
+  
+  .team-info .general-info {
+    margin-top: 1rem;
+    text-align: left;
+  }
+  
+  .general-info p {
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+    color: #7f8c8d;
+  }
+  
+  .match-sections {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .match-section {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .match-section h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .match-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .match-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .team-info-block {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .team-info-block img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+  
+  .team-name {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .vs-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #7f8c8d;
+  }
+  
+  .date-time {
+    font-size: 0.9rem;
+    color: #34495e;
+    font-weight: 500;
+  }
+  
+  .venue {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #95a5a6;
+  }
+  
+  @media (max-width: 768px) {
+    .match-results {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .match-sections {
+      width: 100%;
+    }
+  
+    .team-info {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+  
