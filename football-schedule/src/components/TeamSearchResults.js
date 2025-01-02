@@ -1,24 +1,15 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/TeamSearchResults.css";
 
 function TeamSearchResults({ teams }) {
-  const navigate = useNavigate();
-
-  const handleGoBack = () => {
-    // Go back to home page so user sees the filter date again
-    navigate("/");
-  };
-
   if (!teams || teams.length === 0) {
     return <div className="no-results">No teams found.</div>;
   }
 
   return (
     <div className="team-search-results-container">
-      <button className="go-back-button" onClick={handleGoBack}>
-        &larr; Go Back
-      </button>
+      {/* Go Back button removed as requested */}
 
       <h2>Search Results</h2>
       <div className="team-search-list">

@@ -8,28 +8,27 @@ import FilterBar from "./components/FilterBar";
 import MatchList from "./components/MatchList";
 import SearchBar from "./components/SearchBar";
 import TeamSearchResults from "./components/TeamSearchResults";
-import TeamMatches from "./components/TeamMatches";
 
-import "./App.css";          
+import "./App.css";
 import "./styles/FilterBar.css";
 import "./styles/MatchList.css";
 import "./styles/SearchBar.css";
 import "./styles/TeamSearchResults.css";
-import "./styles/TeamMatches.css";
 
 function App() {
   const todayDate = new Date().toISOString().split("T")[0];
 
-  const [matches, setMatches] = useState([]);  // daily matches
-  const [teams, setTeams] = useState([]);      // search results
+  // States for daily matches
+  const [matches, setMatches] = useState([]);
+  const [teams, setTeams] = useState([]);      
   const [date, setDate] = useState(todayDate);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  // --------------------------
-  // 1) Fetch daily matches
-  // --------------------------
+  // -----------------------------------------
+  // 1) Fetch daily matches for the given date
+  // -----------------------------------------
   const fetchMatches = async (selectedDate) => {
     setLoading(true);
     setError(false);
@@ -39,7 +38,7 @@ function App() {
         {
           headers: {
             "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": "YOUR_RAPID_API_KEY_HERE", // <-- Replace
+            "x-rapidapi-key": "29e2cc0a7bmshbf12442884fb0cap1d846ajsneb0677a7ed00",
           },
         }
       );
@@ -58,9 +57,9 @@ function App() {
     }
   };
 
-  // ----------------------------
+  // -----------------------------------------
   // 2) Search for teams by name
-  // ----------------------------
+  // -----------------------------------------
   const searchTeams = async (keyword) => {
     setLoading(true);
     setError(false);
@@ -70,7 +69,7 @@ function App() {
         {
           headers: {
             "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": "YOUR_RAPID_API_KEY_HERE", // <-- Replace
+            "x-rapidapi-key": "29e2cc0a7bmshbf12442884fb0cap1d846ajsneb0677a7ed00",
           },
         }
       );
@@ -90,30 +89,35 @@ function App() {
     }
   };
 
-  // Fetch daily matches on first load or whenever the date changes
+  // On load or date change, if we're NOT displaying team results, fetch daily matches
   useEffect(() => {
-    // Only fetch daily matches if no teams are in the search results
     if (teams.length === 0) {
       fetchMatches(date);
     }
     // eslint-disable-next-line
   }, [date]);
 
-  // Handler for the filter button
+  // Filter button handler
   const handleFilter = () => {
-    // If we had searched for teams, reset that
+    // If we had searched for teams, clear them
     setTeams([]);
     fetchMatches(date);
   };
 
-  // The home page content ("/")
+  // The home page ("/")
   const HomePage = () => (
     <div className="home-content">
-      {!loading && teams.length > 0 && <TeamSearchResults teams={teams} />}
+      {/* If we have teams from search, show them */}
+      {!loading && teams.length > 0 && (
+        <TeamSearchResults teams={teams} />
+      )}
+
+      {/* If no search results, show daily matches */}
       {!loading && teams.length === 0 && matches.length > 0 && (
         <MatchList matches={matches} />
       )}
 
+      {/* If everything is empty and not loading, "No matches found" */}
       {!loading && !error && teams.length === 0 && matches.length === 0 && (
         <div className="no-matches">No matches found.</div>
       )}
@@ -127,7 +131,7 @@ function App() {
           <h1>Match Schedules</h1>
         </header>
 
-        {/* Filter date on left, search bar on right */}
+        {/* Filter date on the left, search bar on the right */}
         <div className="top-bar">
           <FilterBar date={date} setDate={setDate} onFilter={handleFilter} />
           <SearchBar onSearch={searchTeams} />
@@ -138,7 +142,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/teams/:id" element={<TeamMatches />} />
+          {/* You can have a separate route for team matches if needed */}
         </Routes>
       </div>
     </Router>

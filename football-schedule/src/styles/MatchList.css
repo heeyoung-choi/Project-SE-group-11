@@ -14,13 +14,12 @@
   align-items: center;
 }
 
-/* Buttons on the right */
 .buttons {
   display: flex;
   gap: 0.5rem;
 }
 
-/* One color for both, use shadow for highlight */
+/* Single color + shadow highlight for active button */
 .buttons button {
   padding: 0.4rem 1rem;
   background-color: #bdc3c7;
@@ -32,16 +31,20 @@
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-/* Hover effect */
 .buttons button:hover {
   box-shadow: 0 0 8px rgba(0,0,0,0.2);
   transform: translateY(-2px);
 }
 
-/* Active effect (FT/NS) */
 .buttons .active {
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   transform: translateY(-2px);
+}
+
+/* The small red dot in the LIVE button */
+.red-dot {
+  color: red;
+  margin-left: 4px;
 }
 
 .match-list {
@@ -50,12 +53,13 @@
   gap: 1rem;
 }
 
+/* Each card has a fixed width => equal length */
 .match-card {
   background: #fff;
   border-radius: 8px;
   padding: 1rem;
-  max-width: 600px; /* unify with TeamMatches */
-  margin: 0 auto;   /* center horizontally */
+  width: 350px; /* fixed width to unify the card size */
+  margin: 0 auto; /* center horizontally */
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
@@ -117,8 +121,13 @@
   color: #555;
 }
 
+.live-extra {
+  font-size: 0.9rem;
+  color: #e74c3c; /* maybe red to highlight live? */
+}
+
 .no-matches {
   text-align: center;
-  color: #555;
   font-size: 1rem;
+  color: #555;
 }

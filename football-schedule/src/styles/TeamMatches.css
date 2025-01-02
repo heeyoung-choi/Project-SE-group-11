@@ -32,19 +32,23 @@
     padding-bottom: 0.3rem;
   }
   
-  /* Filter bar for the team date (like the main filter) */
-  .team-filter {
+  /* Header area for the buttons on the right */
+  .team-matches-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
   }
   
-  /* The FT/NS buttons with one color, box-shadow highlight */
+  .spacer {
+    flex: 1; /* push buttons to the right */
+  }
+  
   .team-matches-buttons {
     display: flex;
-    justify-content: center;
     gap: 0.5rem;
   }
   
+  /* Single color, box-shadow highlight */
   .team-matches-buttons button {
     padding: 0.4rem 1rem;
     background-color: #bdc3c7;
@@ -68,18 +72,24 @@
   
   .team-matches-list {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
   }
   
-  /* Same card style as MatchList */
+  /* 
+     A fixed width for each card ensures 
+     they are all the same size visually. 
+  */
   .team-match-card {
     background: #fff;
     border-radius: 8px;
     padding: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
+    width: 350px;     /* fixed width => same size cards */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .league-title {
