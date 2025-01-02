@@ -1,185 +1,347 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
-import SearchMatchesPage from './components/SearchMatchesPage';
-import LoginForm from './components/LoginForm';
-import LoginIcon from '@mui/icons-material/Login';
-import PersonIcon from '@mui/icons-material/Person';
-import Dropdown from 'react-bootstrap/Dropdown';
-const App = () => {
-  const [currentPage, setCurrentPage] = useState('home');
-  const handleLogin = async (email, password) => 
-    {
-      console.log("go")
-      try {
-        const response = await fetch('http://localhost:8000/auth/login', {
-          method: 'POST',
+import FilterBar from "./components/FilterBar";
+import MatchList from "./components/MatchList";
+import SearchBar from "./components/SearchBar";
+import TeamSearchResults from "./components/TeamSearchResults";
+import TeamMatches from "./components/TeamMatches";
+import LoginForm from "./components/LoginForm";
+
+import "./App.css";
+import "./styles/FilterBar.css";
+import "./styles/MatchList.css";
+import "./styles/SearchBar.css";
+import "./styles/TeamSearchResults.css";
+import "./styles/TeamMatches.css";
+import "./styles/NavBar.css";
+
+// Icons & Dropdown (if you need them)
+import LoginIcon from "@mui/icons-material/Login";
+import PersonIcon from "@mui/icons-material/Person";
+import Dropdown from "react-bootstrap/Dropdown";
+
+function App() {
+  const todayDate = new Date().toISOString().split("T")[0];
+
+  // States for daily matches & search
+  const [matches, setMatches] = useState([]);
+  const [teams, setTeams] = useState([]);
+  const [date, setDate] = useState(todayDate);
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  // ---- 1) Fetch daily matches (with leftover NS filtering) ----
+  const fetchMatches = async (selectedDate) => {
+    setLoading(true);
+    setError(false);
+    try {
+      const response = await fetch(
+        `https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${selectedDate}`,
+        {
           headers: {
-            'Content-Type': 'application/json',  // Set the content type to JSON
+            "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+            "x-rapidapi-key": "6c4362965bmshc7357b4fd26115cp136a72jsnbea643c8c40d",
           },
-          body: JSON.stringify({ email, password }),  // Convert the object to a JSON string
-        });
-    
-        if (!response.ok) {
-          // Handle non-200 responses
-          const errorData = await response.json();
-          console.log(errorData)
         }
-    
-        const data = await response.json();  // Parse the JSON response
-        console.log('Login successful:', data);  // Handle success (e.g., save token, navigate)
-        localStorage.setItem('token', data.token)
-        localStorage.setItem('user', JSON.stringify(data.user))
-        setCurrentPage('home')
-      } catch (error) {
-        console.error('Error during login:', error);
-    
-        // Handle error (e.g., show error message to user)
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch daily matches");
       }
+
+      const data = await response.json();
+      let fetchedMatches = data.response || [];
+
+      // Remove leftover "NS" from the past
+      const nowUnix = Math.floor(Date.now() / 1000);
+      fetchedMatches = fetchedMatches.filter((match) => {
+        const matchTime = match.fixture.timestamp;
+        if (matchTime < nowUnix && match.fixture.status.short === "NS") {
+          return false;
+        }
+        return true;
+      });
+
+      setMatches(fetchedMatches);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+      setError(true);
+      setLoading(false);
     }
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage />;
-      case 'search':
-        return <SearchMatchesPage matchesPerPage={10} />;
-      case 'about':
-        return <AboutPage />;
-      case 'login':
-        return <LoginForm handleLogin={handleLogin} />;
-      case 'userinfo':
-        return <UserInfoPage/>
-      default:
-        return <NotFoundPage />;
+  };
+
+  // ---- 2) Search for teams by name ----
+  const searchTeams = async (keyword) => {
+    setLoading(true);
+    setError(false);
+
+    try {
+      const response = await fetch(
+        `https://api-football-v1.p.rapidapi.com/v3/teams?search=${keyword}`,
+        {
+          headers: {
+            "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+            "x-rapidapi-key": "6c4362965bmshc7357b4fd26115cp136a72jsnbea643c8c40d",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to search teams");
+      }
+
+      const data = await response.json();
+      setTeams(data.response || []);
+      // Clear daily matches so we only see the team results
+      setMatches([]);
+      setLoading(false);
+    } catch (err) {
+      console.error(err);
+      setError(true);
+      setLoading(false);
+    }
+  };
+
+  // On date change, fetch daily matches if we have no team results
+  useEffect(() => {
+    if (teams.length === 0) {
+      fetchMatches(date);
+    }
+    // eslint-disable-next-line
+  }, [date]);
+
+  const handleFilter = () => {
+    setTeams([]);
+    fetchMatches(date);
+  };
+
+  // ----------------------------//
+  // 3) Auth / Login
+  // ----------------------------//
+  const handleLogin = async (email, password) => {
+    try {
+      const response = await fetch("http://localhost:8000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.log(errorData);
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      // After login, redirect to home or wherever
+    } catch (error) {
+      console.error("Error during login:", error);
     }
   };
 
   return (
-    <div>
-      <Navigation setCurrentPage={setCurrentPage} />
-      <div className="page-content">{renderPage()}
-      
+    <Router>
+      <div className="app-background">
+        {/* HEADER */}
+        <header className="header">
+          <h1>Match Schedules</h1>
+        </header>
+
+        {/* MAIN NAVIGATION */}
+        <Navigation />
+
+        {/* Loading / Error states */}
+        {loading && <div className="loading">Loading...</div>}
+        {error && <div className="error-message">Failed to load data.</div>}
+
+        {/* Define all routes */}
+        <Routes>
+          {/* 1) HOME ("/") => daily matches & team search */}
+          <Route
+            path="/"
+            element={
+              <HomePage
+                matches={matches}
+                teams={teams}
+                loading={loading}
+                error={error}
+                date={date}
+                setDate={setDate}
+                handleFilter={handleFilter}
+                searchTeams={searchTeams}
+              />
+            }
+          />
+
+          {/* 2) TeamMatches => shows matches for a selected team */}
+          <Route path="/teams/:id" element={<TeamMatches />} />
+
+          {/* 3) About page */}
+          <Route path="/about" element={<AboutPage />} />
+
+          {/* 4) Login page */}
+          <Route path="/login" element={<LoginForm handleLogin={handleLogin} />} />
+
+          {/* 5) User info */}
+          <Route path="/userinfo" element={<UserInfoPage />} />
+
+          {/* 6) 404 */}
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </div>
-      
-    </div>
+    </Router>
   );
-};
+}
 
-
-const Navigation = ({ setCurrentPage }) => {
+// ----------------------------------------------------------------------
+// NAVIGATION (uses <Link> from react-router-dom instead of setCurrentPage)
+// ----------------------------------------------------------------------
+function Navigation() {
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    setCurrentPage('home');
-    console.log(localStorage.getItem('token'));
+    navigate("/"); // redirect to home
   };
-  return(
-  <nav>
-    <ul className="nav-bar">
-      <li onClick={() => setCurrentPage('home')}>Home</li>
-      <li onClick={() => setCurrentPage('search')}>Search Matches</li>
-      <li onClick={() => setCurrentPage('about')}>About</li>
 
-      {  (!localStorage.getItem('token'))  ?
-       <li className="login-button" onClick={() => setCurrentPage('login') }>Login <LoginIcon/> </li> :
-        <li className="account-button">
-          <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-      <PersonIcon />
-      </Dropdown.Toggle>
+  const token = localStorage.getItem("token");
 
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={() => setCurrentPage('userinfo')}>User Info</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item onClick={ () => handleLogout()  }>Logout</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-            </li> }
+  return (
+    <nav>
+      <ul className="nav-bar">
+        {/* We use <Link> instead of an onClick to set route */}
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
 
+        {!token ? (
+          <li className="login-button">
+            <Link to="/login">
+              Login <LoginIcon />
+            </Link>
+          </li>
+        ) : (
+          <li className="account-button">
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                <PersonIcon />
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => navigate("/userinfo")}>
+                  User Info
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </li>
+        )}
+      </ul>
+    </nav>
+  );
+}
 
-    </ul>
-    <style>{`
-      .nav-bar {
-        align-items: center;
-        display: flex;
-        background-color: #333;
-        padding: 1rem;
-        list-style: none;
-        color: white;
-      }
-      .nav-bar li {
-        cursor: pointer;
-        color: white;
-        padding: 0.5rem 1rem;
-      }
-      .nav-bar li:hover {
-        background-color: #575757;
-        border-radius: 5px;
-      }
-      .nav-bar .login-button {
-        margin-left:auto;
-        background-color: #4CAF50; /* Green background for the login button */
-        border-radius: 5px;
-      }
-      .nav-bar .login-button:hover {
-        background-color: #45a049; /* Darker green when hovering */
-      }
-      .page-content {
-        padding: 2rem;
-      }
-      .nav-bar .account-button
-      {
-        margin-left: auto;
-      }
-    `}</style>
-  </nav>
-);}
+// ----------------------------------------------------------------------
+// HOME PAGE => daily matches & team search results
+// ----------------------------------------------------------------------
+function HomePage({
+  matches,
+  teams,
+  loading,
+  error,
+  date,
+  setDate,
+  handleFilter,
+  searchTeams,
+}) {
+  return (
+    <div className="home-content">
+      {/* FilterBar & SearchBar up top */}
+      <div className="top-bar">
+        <FilterBar date={date} setDate={setDate} onFilter={handleFilter} />
+        <SearchBar onSearch={searchTeams} />
+      </div>
 
-const HomePage = () => (
-  <div>
-    <h1>Welcome to Match Predictor</h1>
-    <p>Use this app to search for and predict outcomes of matches.</p>
-  </div>
-);
+      {/* If we have team search results */}
+      {!loading && teams.length > 0 && <TeamSearchResults teams={teams} />}
 
+      {/* If we have daily matches (and no team results) */}
+      {!loading && teams.length === 0 && matches.length > 0 && (
+        <MatchList matches={matches} />
+      )}
 
+      {/* If no matches or teams, show "No matches found" (when not loading/error) */}
+      {!loading && !error && teams.length === 0 && matches.length === 0 && (
+        <div className="no-matches">No matches found.</div>
+      )}
+    </div>
+  );
+}
 
-const AboutPage = () => (
-  <div>
-    <h1>About</h1>
-    <p>This project is designed to help users search and predict match outcomes using modern web technologies.</p>
-  </div>
-);
+// ----------------------------------------------------------------------
+// About Page
+// ----------------------------------------------------------------------
+function AboutPage() {
+  return (
+    <div>
+      <h1>About</h1>
+      <p>This project is designed to help users search and predict matches.</p>
+    </div>
+  );
+}
 
-const NotFoundPage = () => (
-  <div>
-    <h1>404 - Page Not Found</h1>
-    <p>Sorry, the page you're looking for doesn't exist.</p>
-  </div>
-);
-
-const UserInfoPage = () => {
+// ----------------------------------------------------------------------
+// User Info Page
+// ----------------------------------------------------------------------
+function UserInfoPage() {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user)
-  {
+  if (!user) {
     return (
       <div>
         <h1>Can't get user info.</h1>
       </div>
-    )
+    );
   }
-  else 
-  {
-    return (
-      <div class="user-info">
+  return (
+    <div className="user-info">
       <h2>User Information</h2>
-      <p><strong>Name:</strong> {user.email}</p>
-      <p><strong>Email:</strong> {user.displayName} </p>
-      
+      <p>
+        <strong>Name:</strong> {user.email}
+      </p>
+      <p>
+        <strong>Email:</strong> {user.displayName}
+      </p>
     </div>
-    )
-  }
+  );
+}
+
+// ----------------------------------------------------------------------
+// 404 Page
+// ----------------------------------------------------------------------
+function NotFoundPage() {
+  return (
+    <div>
+      <h1>404 - Page Not Found</h1>
+      <p>Sorry, the page you're looking for doesn't exist.</p>
+    </div>
+  );
 }
 
 export default App;

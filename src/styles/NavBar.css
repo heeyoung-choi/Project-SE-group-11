@@ -1,0 +1,32 @@
+.nav-bar {
+    align-items: center;
+    display: flex;
+    background-color: #333;
+    padding: 1rem;
+    list-style: none;
+    color: white;
+  }
+  .nav-bar li {
+    cursor: pointer;
+    color: white;
+    padding: 0.5rem 1rem;
+  }
+  .nav-bar li:hover {
+    background-color: #575757;
+    border-radius: 5px;
+  }
+  .nav-bar .login-button {
+    margin-left:auto;
+    background-color: #4CAF50; /* Green background for the login button */
+    border-radius: 5px;
+  }
+  .nav-bar .login-button:hover {
+    background-color: #45a049; /* Darker green when hovering */
+  }
+  .page-content {
+    padding: 2rem;
+  }
+  .nav-bar .account-button
+  {
+    margin-left: auto;
+  }
