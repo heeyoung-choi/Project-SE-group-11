@@ -8,27 +8,28 @@ import FilterBar from "./components/FilterBar";
 import MatchList from "./components/MatchList";
 import SearchBar from "./components/SearchBar";
 import TeamSearchResults from "./components/TeamSearchResults";
+import TeamMatches from "./components/TeamMatches";
 
-import "./App.css";
+import "./App.css";          // Our main app styling
 import "./styles/FilterBar.css";
 import "./styles/MatchList.css";
 import "./styles/SearchBar.css";
 import "./styles/TeamSearchResults.css";
+import "./styles/TeamMatches.css";
 
 function App() {
   const todayDate = new Date().toISOString().split("T")[0];
 
-  // States for daily matches
-  const [matches, setMatches] = useState([]);
-  const [teams, setTeams] = useState([]);      
+  const [matches, setMatches] = useState([]);  // daily matches
+  const [teams, setTeams] = useState([]);      // search results
   const [date, setDate] = useState(todayDate);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  // -----------------------------------------
-  // 1) Fetch daily matches for the given date
-  // -----------------------------------------
+  // --------------------------
+  // 1. Fetch daily matches
+  // --------------------------
   const fetchMatches = async (selectedDate) => {
     setLoading(true);
     setError(false);
@@ -38,28 +39,42 @@ function App() {
         {
           headers: {
             "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": "29e2cc0a7bmshbf12442884fb0cap1d846ajsneb0677a7ed00",
+            "x-rapidapi-key": "6c4362965bmshc7357b4fd26115cp136a72jsnbea643c8c40d",
           },
         }
       );
-
+  
       if (!response.ok) {
         throw new Error("Failed to fetch daily matches");
       }
-
+  
       const data = await response.json();
-      setMatches(data.response || []);
+      let fetchedMatches = data.response || [];
+  
+      // Get current Unix timestamp (in seconds)
+      const nowUnix = Math.floor(Date.now() / 1000);
+  
+      // Filter out any "NS" matches whose time is already in the past
+      fetchedMatches = fetchedMatches.filter((match) => {
+        const matchTime = match.fixture.timestamp; // also in seconds
+        if (matchTime < nowUnix && match.fixture.status.short === "NS") {
+          return false; // remove leftover "NS" from past
+        }
+        return true;
+      });
+  
+      setMatches(fetchedMatches);
       setLoading(false);
     } catch (err) {
       console.error(err);
       setError(true);
       setLoading(false);
     }
-  };
+  };  
 
-  // -----------------------------------------
-  // 2) Search for teams by name
-  // -----------------------------------------
+  // ----------------------------
+  // 2. Search for teams by name
+  // ----------------------------
   const searchTeams = async (keyword) => {
     setLoading(true);
     setError(false);
@@ -69,7 +84,7 @@ function App() {
         {
           headers: {
             "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-            "x-rapidapi-key": "29e2cc0a7bmshbf12442884fb0cap1d846ajsneb0677a7ed00",
+            "x-rapidapi-key": "6c4362965bmshc7357b4fd26115cp136a72jsnbea643c8c40d", // <-- Replace
           },
         }
       );
@@ -89,35 +104,34 @@ function App() {
     }
   };
 
-  // On load or date change, if we're NOT displaying team results, fetch daily matches
+  // Fetch daily matches on first load or whenever the date changes
   useEffect(() => {
+    // Only fetch daily matches if we don't have any search results
     if (teams.length === 0) {
       fetchMatches(date);
     }
     // eslint-disable-next-line
   }, [date]);
 
-  // Filter button handler
+  // Handler for the filter button
   const handleFilter = () => {
-    // If we had searched for teams, clear them
+    // If we had searched for teams, reset that
     setTeams([]);
     fetchMatches(date);
   };
 
-  // The home page ("/")
+  // The Home page content ("/")
   const HomePage = () => (
     <div className="home-content">
       {/* If we have teams from search, show them */}
-      {!loading && teams.length > 0 && (
-        <TeamSearchResults teams={teams} />
-      )}
+      {!loading && teams.length > 0 && <TeamSearchResults teams={teams} />}
 
-      {/* If no search results, show daily matches */}
+      {/* If we have daily matches (and no search results), show them */}
       {!loading && teams.length === 0 && matches.length > 0 && (
         <MatchList matches={matches} />
       )}
 
-      {/* If everything is empty and not loading, "No matches found" */}
+      {/* If no matches or teams, show "No matches found" (when not loading/error) */}
       {!loading && !error && teams.length === 0 && matches.length === 0 && (
         <div className="no-matches">No matches found.</div>
       )}
@@ -126,12 +140,12 @@ function App() {
 
   return (
     <Router>
-      <div className="app-container">
+      {/* 1) Our background class is app-background */}
+      <div className="app-background">
         <header className="header">
           <h1>Match Schedules</h1>
         </header>
 
-        {/* Filter date on the left, search bar on the right */}
         <div className="top-bar">
           <FilterBar date={date} setDate={setDate} onFilter={handleFilter} />
           <SearchBar onSearch={searchTeams} />
@@ -142,7 +156,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {/* You can have a separate route for team matches if needed */}
+          {/* TeamMatches route */}
+          <Route path="/teams/:id" element={<TeamMatches />} />
         </Routes>
       </div>
     </Router>

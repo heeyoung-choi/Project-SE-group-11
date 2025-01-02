@@ -6,19 +6,20 @@ function TeamMatches() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [matches, setMatches] = useState([]);
+  const [allMatches, setAllMatches] = useState([]);
+  const [liveMatches, setLiveMatches] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  // "finished" or "upcoming"
+  // "upcoming", "finished", or "live"
   const [viewMode, setViewMode] = useState("upcoming");
 
+  // Fetch all team matches (season=2024) once
   useEffect(() => {
-    const fetchTeamMatches = async () => {
+    const fetchTeamAll = async () => {
       setLoading(true);
       setError(false);
       try {
-        // Just fetch season=2024 for the given team (no date filter)
         const response = await fetch(
           `https://api-football-v1.p.rapidapi.com/v3/fixtures?season=2024&team=${id}`,
           {
@@ -28,13 +29,11 @@ function TeamMatches() {
             },
           }
         );
-
         if (!response.ok) {
-          throw new Error("Failed to fetch matches");
+          throw new Error("Failed to fetch team matches");
         }
-
         const data = await response.json();
-        setMatches(data.response || []);
+        setAllMatches(data.response || []);
         setLoading(false);
       } catch (err) {
         console.error(err);
@@ -42,30 +41,67 @@ function TeamMatches() {
         setLoading(false);
       }
     };
-
-    fetchTeamMatches();
+    fetchTeamAll();
   }, [id]);
 
-  // Filter by FT or NS
-  const filteredMatches = matches.filter((m) => {
-    const status = m.fixture.status.short;
-    return viewMode === "finished" ? status === "FT" : status === "NS";
-  });
+  // Fetch live matches for this team
+  const fetchLiveMatches = async () => {
+    try {
+      const response = await fetch(
+        `https://api-football-v1.p.rapidapi.com/v3/fixtures?live=all&team=${id}`,
+        {
+          headers: {
+            "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+            "x-rapidapi-key": "29e2cc0a7bmshbf12442884fb0cap1d846ajsneb0677a7ed00", // <-- Replace
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch live matches");
+      }
+      const data = await response.json();
+      setLiveMatches(data.response || []);
+    } catch (err) {
+      console.error(err);
+      // Keep liveMatches empty on error
+    }
+  };
+
+  // If user clicks "LIVE" button, fetch the live matches
+  useEffect(() => {
+    if (viewMode === "live") {
+      fetchLiveMatches();
+    }
+    // eslint-disable-next-line
+  }, [viewMode]);
 
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error-message">Failed to load matches</div>;
 
+  // Filter allMatches for "upcoming" or "finished"
+  let finalMatches = [];
+  if (viewMode === "finished") {
+    finalMatches = allMatches.filter(
+      (m) => m.fixture.status.short === "FT"
+    );
+  } else if (viewMode === "upcoming") {
+    finalMatches = allMatches.filter(
+      (m) => m.fixture.status.short === "NS"
+    );
+  } else {
+    // "live" => use liveMatches array
+    finalMatches = liveMatches;
+  }
+
   return (
     <div className="team-matches-container">
-      {/* If you still want a go back button, keep it. If not, remove. 
-          The user didn't say to remove it from TeamMatches, so let's keep it. */}
       <button className="go-back-button" onClick={() => navigate("/")}>
         &larr; Go Back
       </button>
 
       <h2>Team Matches (Season 2024)</h2>
 
-      {/* Finished/Upcoming buttons on the right */}
+      {/* Button row on the right */}
       <div className="team-matches-header">
         <div className="spacer"></div>
         <div className="team-matches-buttons">
@@ -81,14 +117,20 @@ function TeamMatches() {
           >
             Upcoming
           </button>
+          <button
+            className={viewMode === "live" ? "active" : ""}
+            onClick={() => setViewMode("live")}
+          >
+            LIVE <span className="red-dot">●</span>
+          </button>
         </div>
       </div>
 
-      {filteredMatches.length === 0 ? (
+      {finalMatches.length === 0 ? (
         <p className="no-matches">Matches not found.</p>
       ) : (
         <div className="team-matches-list">
-          {filteredMatches.map((match) => {
+          {finalMatches.map((match) => {
             const { fixture, teams, league, goals } = match;
             const dateStr = new Date(fixture.date).toLocaleString();
 
@@ -100,7 +142,7 @@ function TeamMatches() {
                 <p className="fixture-date">{dateStr}</p>
 
                 <div className="teams-centered">
-                  {/* HOME TEAM */}
+                  {/* HOME */}
                   <div className="single-team">
                     <img
                       src={teams.home.logo}
@@ -108,14 +150,15 @@ function TeamMatches() {
                       className="team-logo"
                     />
                     <p className="team-name">{teams.home.name}</p>
-                    {viewMode === "finished" && (
+                    {/* Show score if finished or live */}
+                    {(viewMode === "finished" || viewMode === "live") && (
                       <div className="score-big">{goals.home ?? "-"}</div>
                     )}
                   </div>
 
                   <div className="vs-text">VS</div>
 
-                  {/* AWAY TEAM */}
+                  {/* AWAY */}
                   <div className="single-team">
                     <img
                       src={teams.away.logo}
@@ -123,7 +166,7 @@ function TeamMatches() {
                       className="team-logo"
                     />
                     <p className="team-name">{teams.away.name}</p>
-                    {viewMode === "finished" && (
+                    {(viewMode === "finished" || viewMode === "live") && (
                       <div className="score-big">{goals.away ?? "-"}</div>
                     )}
                   </div>
@@ -132,10 +175,21 @@ function TeamMatches() {
                 <p className="venue-text">
                   Venue: {fixture.venue?.name || "N/A"}
                 </p>
-                <p className="status-text">
-                  Status: {fixture.status.short} (
-                  {fixture.status.long || "Unknown"})
-                </p>
+
+                {/* If LIVE, show elapsed time & status.long */}
+                {viewMode === "live" && fixture.status.elapsed != null && (
+                  <p className="live-extra">
+                    Time Elapsed: {fixture.status.elapsed}’ ({fixture.status.long})
+                  </p>
+                )}
+
+                {/* Otherwise show normal status */}
+                {viewMode !== "live" && (
+                  <p className="status-text">
+                    Status: {fixture.status.short} (
+                    {fixture.status.long || "Unknown"})
+                  </p>
+                )}
               </div>
             );
           })}
