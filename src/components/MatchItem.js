@@ -1,6 +1,6 @@
 import React from 'react';
 import "../styles/MatchItem.css"
-const MatchItem = ({match}) => 
+const MatchItem = ({match, onClick}) => 
 {
     
     const { fixture, teams, league } = match;
@@ -13,7 +13,9 @@ const MatchItem = ({match}) =>
     const formattedDate = date.toLocaleDateString(undefined, options);
     const [matchDate, matchTime] = formattedDate.split(', ');
     return  (
-    <div key={fixture.id} className="match-card">
+    <div 
+    onClick={onClick} 
+    key={fixture.id} className="match-card">
         <div className="match-info">
             <div className="date-time">
                 <p>{matchDate}</p>

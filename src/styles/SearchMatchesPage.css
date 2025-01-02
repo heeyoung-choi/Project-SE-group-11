@@ -5,4 +5,23 @@
     gap: 1rem;
     padding: 1rem;
   }
-  
+  .search-options
+  {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 100px;
+  }
+  .input-box
+  {
+    height : 40px;
+    margin-left: 50px;
+  }
+  .search-options .async-select
+  {
+    width: 400px;
+   
+  }
+  .input-box.input-group
+  {
+    width: 400px;
+  }

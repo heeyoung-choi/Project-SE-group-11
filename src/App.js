@@ -5,11 +5,35 @@ import LoginForm from './components/LoginForm';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from '@mui/icons-material/Person';
 import Dropdown from 'react-bootstrap/Dropdown';
+import MatchDetail from './components/MatchDetail';
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
+  const [currentMatch, setCurrentMatch] = useState('');
+  const [currentPredictions, setCurrentPredictions] = useState('')
+  const fetchCurrentPredictions = async() =>
+  {
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      const response = await fetch(`http://localhost:8000/predicitons/${user.id}`, {
+        method: 'GET'
+      });
+      if (!response.ok)
+      {
+        const error  = await response.json()
+        console.log(error)
+      }
+      const data = await response.json();  // Parse the JSON response
+      setCurrentPredictions(data.predictions);
+
+    }
+    catch(error)
+    {
+      console.log('error during getting predictions')
+    }
+  }
   const handleLogin = async (email, password) => 
     {
-      console.log("go")
+      
       try {
         const response = await fetch('http://localhost:8000/auth/login', {
           method: 'POST',
@@ -36,18 +60,27 @@ const App = () => {
         // Handle error (e.g., show error message to user)
       }
     }
+    const isLoggedIn = () => {
+      // const token = localStorage.getItem('token');
+      // return !!token; // Returns true if token exists
+      return true;
+  };
   const renderPage = () => {
     switch (currentPage) {
       case 'home':
         return <HomePage />;
       case 'search':
-        return <SearchMatchesPage matchesPerPage={10} />;
+        return <SearchMatchesPage matchesPerPage={10} onMatchFocus={()=> setCurrentPage('matchdetail') } setMatch = {setCurrentMatch} />;
       case 'about':
         return <AboutPage />;
       case 'login':
         return <LoginForm handleLogin={handleLogin} />;
       case 'userinfo':
-        return <UserInfoPage/>
+        return <UserInfoPage/>;
+      case 'matchdetail':
+        return (currentMatch) ?  
+        
+        <MatchDetail match={currentMatch} isLoggedin={isLoggedIn} /> : "";
       default:
         return <NotFoundPage />;
     }
@@ -55,7 +88,7 @@ const App = () => {
 
   return (
     <div>
-      <Navigation setCurrentPage={setCurrentPage} />
+      <Navigation setCurrentPage={setCurrentPage} fetchCurrentPredictions={fetchCurrentPredictions} />
       <div className="page-content">{renderPage()}
       
       </div>
@@ -65,7 +98,7 @@ const App = () => {
 };
 
 
-const Navigation = ({ setCurrentPage }) => {
+const Navigation = ({ setCurrentPage, fetchCurrentPredictions }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -79,7 +112,7 @@ const Navigation = ({ setCurrentPage }) => {
       <li onClick={() => setCurrentPage('home')}>Home</li>
       <li onClick={() => setCurrentPage('search')}>Search Matches</li>
       <li onClick={() => setCurrentPage('about')}>About</li>
-
+      
       {  (!localStorage.getItem('token'))  ?
        <li className="login-button" onClick={() => setCurrentPage('login') }>Login <LoginIcon/> </li> :
         <li className="account-button">
@@ -90,7 +123,10 @@ const Navigation = ({ setCurrentPage }) => {
 
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => setCurrentPage('userinfo')}>User Info</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+        <Dropdown.Item onClick={() => {
+          fetchCurrentPredictions();
+          setCurrentPage('userpredictions');
+          }} >Get All Predictions</Dropdown.Item>
         <Dropdown.Item onClick={ () => handleLogout()  }>Logout</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
