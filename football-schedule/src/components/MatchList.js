@@ -1,47 +1,93 @@
-import React from 'react';
-import '../styles/MatchList.css';
+import React, { useState } from "react";
+import "../styles/MatchList.css";
 
 function MatchList({ matches }) {
-  return (
-    <div className="match-list">
-      {matches.map((match) => {
-        const { fixture, teams, league } = match;
-        const date = new Date(fixture.date);
-        const options = { 
-          year: 'numeric', month: 'long', day: 'numeric', 
-          hour: '2-digit', minute: '2-digit', timeZone: 'UTC' 
-        };
-        const formattedDate = date.toLocaleDateString(undefined, options);
-        const [matchDate, matchTime] = formattedDate.split(', ');
+  // "finished" or "upcoming"
+  const [viewMode, setViewMode] = useState("upcoming");
 
-        return (
-          <div key={fixture.id} className="match-card">
-            <div className="match-info">
-              <div className="date-time">
-                <p>{matchDate}</p>
-                <p>{matchTime}</p>
-              </div>
-              <div className="teams">
-                <div className="team-block">
-                  <img src={teams.home.logo} alt={`${teams.home.name} logo`} />
-                  <p>{teams.home.name}</p>
+  const filteredMatches = matches.filter((m) => {
+    const status = m.fixture.status.short;
+    return viewMode === "finished" ? status === "FT" : status === "NS";
+  });
+
+  return (
+    <div className="match-list-container">
+      <div className="match-list-header">
+        <div></div> {/* empty space on left */}
+        <div className="buttons">
+          <button
+            className={viewMode === "finished" ? "active" : ""}
+            onClick={() => setViewMode("finished")}
+          >
+            Finished
+          </button>
+          <button
+            className={viewMode === "upcoming" ? "active" : ""}
+            onClick={() => setViewMode("upcoming")}
+          >
+            Upcoming
+          </button>
+        </div>
+      </div>
+
+      {filteredMatches.length === 0 ? (
+        <p className="no-matches">Matches not found.</p>
+      ) : (
+        <div className="match-list">
+          {filteredMatches.map((match) => {
+            const { fixture, teams, league, goals } = match;
+            const dateObj = new Date(fixture.date);
+            const formattedDate = dateObj.toLocaleString();
+
+            return (
+              <div key={fixture.id} className="match-card">
+                <h3 className="league-title">
+                  {league.name} ({league.country})
+                </h3>
+                <p className="fixture-date">{formattedDate}</p>
+
+                <div className="teams-centered">
+                  {/* HOME */}
+                  <div className="single-team">
+                    <img
+                      src={teams.home.logo}
+                      alt={teams.home.name}
+                      className="team-logo"
+                    />
+                    <p className="team-name">{teams.home.name}</p>
+                    {viewMode === "finished" && (
+                      <div className="score-big">{goals.home ?? "-"}</div>
+                    )}
+                  </div>
+
+                  <div className="vs-text">VS</div>
+
+                  {/* AWAY */}
+                  <div className="single-team">
+                    <img
+                      src={teams.away.logo}
+                      alt={teams.away.name}
+                      className="team-logo"
+                    />
+                    <p className="team-name">{teams.away.name}</p>
+                    {viewMode === "finished" && (
+                      <div className="score-big">{goals.away ?? "-"}</div>
+                    )}
+                  </div>
                 </div>
-                <div className="vs-text">VS</div>
-                <div className="team-block">
-                  <img src={teams.away.logo} alt={`${teams.away.name} logo`} />
-                  <p>{teams.away.name}</p>
-                </div>
+
+                <p className="venue-text">
+                  Venue: {fixture.venue?.name || "N/A"}
+                </p>
+                <p className="status-text">
+                  Status: {fixture.status.short} (
+                  {fixture.status.long || "Unknown"})
+                </p>
               </div>
-              <div className="venue">
-                <p>{fixture.venue?.name || 'Unknown Venue'}</p>
-              </div>
-              <div className="league-name">
-                <p>{league.name} - {league.country}</p>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
