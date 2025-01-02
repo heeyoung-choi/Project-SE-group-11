@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 
 function SearchBar({ onSearch }) {
-  const [teamName, setTeamName] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   const handleSearch = () => {
-    if (teamName.trim()) {
-      onSearch(teamName.trim());
+    if (keyword.trim()) {
+      onSearch(keyword.trim());
     }
   };
 
   return (
-    <div className="search-bar">
+    <div className="search-bar-container">
       <input
         type="text"
-        placeholder="Enter team name..."
-        value={teamName}
-        onChange={(e) => setTeamName(e.target.value)}
+        placeholder="Search teams..."
+        value={keyword}
+        onChange={(e) => setKeyword(e.target.value)}
+        className="search-bar-input"
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch} className="search-bar-button">
+        Search
+      </button>
     </div>
   );
 }
