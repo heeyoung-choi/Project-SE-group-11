@@ -6,6 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import PersonIcon from '@mui/icons-material/Person';
 import Dropdown from 'react-bootstrap/Dropdown';
 import MatchDetail from './components/MatchDetail';
+import PredictionsDisplay from './components/PredictionsDisplay';
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
   const [currentMatch, setCurrentMatch] = useState('');
@@ -81,6 +82,8 @@ const App = () => {
         return (currentMatch) ?  
         
         <MatchDetail match={currentMatch} isLoggedin={isLoggedIn} /> : "";
+      case 'userpredictions':
+        return <PredictionsDisplay predictions={currentPredictions} />
       default:
         return <NotFoundPage />;
     }
