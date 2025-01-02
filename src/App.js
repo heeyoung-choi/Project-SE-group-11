@@ -66,34 +66,7 @@ const App = () => {
 
 
 const Navigation = ({ setCurrentPage }) => {
-  const handleLogin = async (email, password) => 
-{
-  console.log("go")
-  try {
-    const response = await fetch('http://localhost:8000/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',  // Set the content type to JSON
-      },
-      body: JSON.stringify({ email, password }),  // Convert the object to a JSON string
-    });
 
-    if (!response.ok) {
-      // Handle non-200 responses
-      const errorData = await response.json();
-      console.log(errorData)
-    }
-
-    const data = await response.json();  // Parse the JSON response
-    console.log('Login successful:', data);  // Handle success (e.g., save token, navigate)
-    localStorage.setItem('token', data.token)
-    localStorage.setItem('user', JSON.stringify(data.user))
-  } catch (error) {
-    console.error('Error during login:', error);
-
-    // Handle error (e.g., show error message to user)
-  }
-}
   const handleLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
