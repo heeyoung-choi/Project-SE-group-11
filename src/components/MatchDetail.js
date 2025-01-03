@@ -18,7 +18,7 @@ const MatchDetail = ({match, isLoggedin}) =>
         try {
         const user = JSON.parse(localStorage.getItem("user"));
         const bodyJson = {
-                userId :  user && user.id ? user.id : "",
+                userId :  user && user.uid ? user.uid : "",
                 matchId : fixture.id,
                 type : "score",
                 data : {

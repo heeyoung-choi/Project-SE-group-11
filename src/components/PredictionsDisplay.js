@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import MatchItem from './MatchItem';
 
 const PredictionsDisplay = ({ predictions }) => {
   const [responses, setResponses] = useState({}); // To store responses for each matchid
@@ -12,9 +13,19 @@ const PredictionsDisplay = ({ predictions }) => {
 
         // Fetch data for each matchid sequentially or concurrently
         for (const prediction of predictions) {
-          const response = await fetch(`/api/match/${prediction.matchid}`); // Replace with your API endpoint
+            //console.log(prediction)
+            const options = {
+                method: 'GET',
+                headers: {
+                      "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+                        "x-rapidapi-key": "6c4362965bmshc7357b4fd26115cp136a72jsnbea643c8c40d"
+                }
+            };
+          const response = await fetch(`https://api-football-v1.p.rapidapi.com/v3/fixtures?id=${prediction.matchId}`, options); // Replace with your API endpoint
           const data = await response.json();
-          newResponses[prediction.matchid] = data; // Store data using matchid as the key
+          
+          //console.log(data.response)
+          newResponses[prediction.matchid] = data.response; // Store data using matchid as the key
         }
 
         setResponses(newResponses);
@@ -38,11 +49,10 @@ const PredictionsDisplay = ({ predictions }) => {
     <div>
       {predictions.map((p) => (
         <div key={p.matchid}>
-          <h3>Match ID: {p.matchid}</h3>
-          <p>
-            {responses[p.matchid]
-              ? JSON.stringify(responses[p.matchid]) // Render fetched data
-              : "No data available for this match."}
+          
+            <MatchItem match={responses[p.matchid][0]} />
+            <p>
+                Your predictions {p.data.predictedScore.teamA} :{p.data.predictedScore.teamB}
           </p>
         </div>
       ))}

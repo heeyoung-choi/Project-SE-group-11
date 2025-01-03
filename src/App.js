@@ -15,7 +15,8 @@ const App = () => {
   {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      const response = await fetch(`http://localhost:8000/predicitons/${user.id}`, {
+      //console.log(user)
+      const response = await fetch(`http://localhost:8000/predictions/${user.uid}`, {
         method: 'GET'
       });
       if (!response.ok)
@@ -24,6 +25,7 @@ const App = () => {
         console.log(error)
       }
       const data = await response.json();  // Parse the JSON response
+      //console.log(data.predictions)
       setCurrentPredictions(data.predictions);
 
     }
@@ -62,9 +64,9 @@ const App = () => {
       }
     }
     const isLoggedIn = () => {
-      // const token = localStorage.getItem('token');
-      // return !!token; // Returns true if token exists
-      return true;
+      const token = localStorage.getItem('token');
+      return !!token; // Returns true if token exists
+      //return true;
   };
   const renderPage = () => {
     switch (currentPage) {
@@ -107,7 +109,7 @@ const Navigation = ({ setCurrentPage, fetchCurrentPredictions }) => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     setCurrentPage('home');
-    console.log(localStorage.getItem('token'));
+    //console.log(localStorage.getItem('token'));
   };
   return(
   <nav>

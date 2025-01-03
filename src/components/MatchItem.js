@@ -2,7 +2,8 @@ import React from 'react';
 import "../styles/MatchItem.css"
 const MatchItem = ({match, onClick}) => 
 {
-    
+    console.log("match data")
+    console.log(match)
     const { fixture, teams, league } = match;
     
     const date = new Date(fixture.date);
